@@ -44,7 +44,6 @@ public class UploadAsset implements Serializable {
     RemoteInputStream result = workspace.act(new MasterToSlaveFileCallable<RemoteInputStream>() {
         @Override
         public RemoteInputStream invoke(File f, VirtualChannel channel) throws IOException, InterruptedException {
-            // Perform node-specific logic here
             FileInputStream input = new FileInputStream(workspace.child(localFilePath).getRemote());
             return new RemoteInputStream(input, Flag.GREEDY);
         }
