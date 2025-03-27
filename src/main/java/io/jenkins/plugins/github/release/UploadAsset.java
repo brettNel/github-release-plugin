@@ -40,24 +40,17 @@ public class UploadAsset implements Serializable {
   }
 
   public InputStream toStream(FilePath workspace) throws IOException, InterruptedException {
-    final String localFilePath = this.filePath;
-    RemoteInputStream result = workspace.act(new MasterToSlaveFileCallable<RemoteInputStream>() {
-        @Override
-        public RemoteInputStream invoke(File f, VirtualChannel channel) throws IOException, InterruptedException {
-            FileInputStream input = new FileInputStream(workspace.child(localFilePath).getRemote());
-            return new RemoteInputStream(input, Flag.GREEDY);
-        }
-    });
-    return result;
+    return workspace.child(filePath).read();
   }
 
+
   public boolean isMissing(FilePath workspace) {
-      try {
-          FilePath file = workspace.child(this.filePath);
-          return !file.exists() || file.isDirectory();
-      } catch (IOException | InterruptedException e) {
-          // If an exception occurs, assume the file is missing
-          return true;
-      }
+    try {
+      FilePath file = workspace.child(this.filePath);
+      return !file.exists() || file.isDirectory();
+    } catch (IOException | InterruptedException e) {
+      // If an exception occurs, assume the file is missing
+      return true;
+    }
   }
 }
