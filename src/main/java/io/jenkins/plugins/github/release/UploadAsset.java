@@ -2,15 +2,9 @@ package io.jenkins.plugins.github.release;
 
 import hudson.FilePath;
 import hudson.Util;
-import hudson.remoting.RemoteInputStream;
-import hudson.remoting.VirtualChannel;
-import jenkins.MasterToSlaveFileCallable;
-import hudson.remoting.RemoteInputStream.Flag;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
